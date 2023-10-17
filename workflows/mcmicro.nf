@@ -74,15 +74,11 @@ workflow MCMICRO {
 
     ch_versions = Channel.empty()
 
-    ch_from_samplesheet = Channel.fromSamplesheet("input")
+    samplesheet_fields = Channel.fromSamplesheet("input")
+    markerFile=samplesheet_fields.map({[[id: it[0]], it[2]]})
+    cycleStack=samplesheet_fields.map({[[id: it[0]],file("${it[1]}/*.tif")]})
 
-    markerFile = [[id:"test_all" ], file("/workspace/data/cycif-tonsil-channels.csv")]
 
-    raw_images = [ [ id:'test_all' ],[
-                file("/workspace/data/ashlar/cycif-tonsil-cycle1.ome.tif"),
-                file("/workspace/data/ashlar/cycif-tonsil-cycle2.ome.tif"),
-                file("/workspace/data/ashlar/cycif-tonsil-cycle3.ome.tif")]
-                ]
 
     dfp =file("/workspace/data/cycif-tonsil-dfp.ome.tif")
     ffp =file("/workspace/data/cycif-tonsil-ffp.ome.tif")
@@ -111,7 +107,7 @@ workflow MCMICRO {
     // }
     // */
 
-    ASHLAR(raw_images, dfp, ffp)
+    ASHLAR(cycleStack, dfp, ffp)
     ch_versions = ch_versions.mix(ASHLAR.out.versions)
 
     // // Run Background Correction

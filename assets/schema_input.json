@@ -7,7 +7,7 @@
     "items": {
         "type": "object",
         "properties": {
-            "sample": {
+            "sampleID": {
                 "type": "string",
                 "pattern": ".*$",
                 "errorMessage": "Sample name must be provided and cannot contain spaces"
@@ -45,6 +45,6 @@
                 ]
             }
         },
-        "required": ["sample", "data", "markerFile"]
+        "required": ["sampleID", "data", "markerFile"]
     }
 }
