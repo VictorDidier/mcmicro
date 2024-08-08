@@ -74,6 +74,15 @@
                 "cellpose_model": {
                     "type": "string",
                     "description": "optional model file for cellpose segmentation"
+                },
+                "staging": {
+                    "type": "boolean",
+                    "description": "Should staging be performed?"
+                },
+                "staging_method": {
+                    "type": "string",
+                    "description": "Which staging method to use.",
+                    "pattern": "^((macsima)?,?)*(?<!,)$"
                 }
             }
         },

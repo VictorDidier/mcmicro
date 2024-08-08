@@ -73,6 +73,8 @@ workflow MCMICRO {
         | ASHLAR
     ch_versions = ch_versions.mix(ASHLAR.out.versions)
 
+    ASHLAR.out.tif.view()
+
     // // Run Background Correction
     // BACKSUB(ASHLAR.out.tif, ch_markers)
     //BACKSUB(ASHLAR.out.tif, [[id: "backsub"], params.marker_sheet])
